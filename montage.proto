@@ -1,0 +1,47 @@
+syntax = "proto3";
+package montage; // Change the package name to "montage"
+
+// Definition of the Montage message
+message Montage {
+  string id = 1;
+  string titre = 2; // Change the field name to "titre"
+  int32 nombre_pieces = 3; // Add a new field "nombre_pieces" of type integer for the number of pieces
+  // Add other data fields for montages as needed
+}
+
+// Definition of the request and response messages for the methods
+message GetMontageRequest {
+  string montage_id = 1; // Change the field name to "montage_id"
+}
+
+message GetMontageResponse {
+  Montage montage = 1; // Change the field name to "montage"
+}
+
+message SearchMontagesRequest {
+  string query = 1;
+}
+
+message SearchMontagesResponse {
+  repeated Montage montages = 1; // Change the field name to "montages"
+}
+
+// Message for creating a montage
+message CreateMontageRequest {
+  string titre = 1;
+  int32 nombre_pieces = 2;
+  // Add other fields as needed
+}
+
+// Response for creating a montage
+message CreateMontageResponse {
+  Montage montage = 1;
+}
+
+// Definition of the MontageService service
+service MontageService {
+  rpc GetMontage(GetMontageRequest) returns (GetMontageResponse);
+  rpc SearchMontages(SearchMontagesRequest) returns (SearchMontagesResponse);
+  rpc CreateMontage(CreateMontageRequest) returns (CreateMontageResponse);
+  // Add other methods as needed
+}

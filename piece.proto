@@ -1,0 +1,48 @@
+syntax = "proto3";
+package piece;
+
+// Définition du message piece
+message Piece {
+  string id = 1;
+  string nom = 2; // Changed field name to "nom"
+  string description = 3;
+  string fonctionnalite = 4; // Added new field "fonctionnalite"
+  // Ajouter d'autres champs de données pour les pièces au besoin
+}
+
+// Définition des messages de requête et de réponse pour les méthodes d
+message GetPieceRequest {
+  string piece_id = 1;
+}
+
+message GetPieceResponse {
+  Piece piece = 1;
+}
+
+message SearchPiecesRequest {
+  string query = 1;
+}
+
+message SearchPiecesResponse {
+  repeated Piece pieces = 1;
+}
+
+// Message pour créer une pièce
+message CreatePieceRequest {
+  string nom = 1;
+  string description = 2;
+  string fonctionnalite = 3;
+  // Ajouter d'autres champs au besoin
+}
+
+// Réponse pour la création d'une pièce
+message CreatePieceResponse {
+  Piece piece = 1;
+}
+
+service PieceService {
+  rpc GetPiece(GetPieceRequest) returns (GetPieceResponse);
+  rpc SearchPieces(SearchPiecesRequest) returns (SearchPiecesResponse);
+  rpc CreatePiece(CreatePieceRequest) returns (CreatePieceResponse);
+  // Ajouter d'autres méthodes au besoin
+}
